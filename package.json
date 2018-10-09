@@ -1,5 +1,5 @@
 {
-  "name": "intl-messageformat-parser",
+  "name": "@ember-intl/intl-messageformat-parser",
   "version": "1.4.0",
   "description": "Parses ICU Message strings into an AST via JavaScript.",
   "main": "index.js",
