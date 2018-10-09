@@ -148,20 +148,22 @@ ws 'whitespace' = [ \t\n\r]+
 _ 'optionalWhitespace' = $(ws*)
 
 digit    = [0-9]
-hexDigit = [0-9a-f]i
 
 number = digits:('0' / $([1-9] digit*)) {
     return parseInt(digits, 10);
 }
 
+doubleapos = "''" { return "'"; }
+
+inapos = doubleapos / str:[^']+ { return str.join(''); }
+
+quoted
+  = "'{"str:inapos*"'" { return '\u007B'+str.join(''); }
+  / "'}"str:inapos*"'" { return '\u007D'+str.join(''); }
+  / "'"
+
 char
-    = [^{}\\\0-\x1F\x7f \t\n\r]
-    / '\\\\' { return '\\'; }
-    / '\\#'  { return '\\#'; }
-    / '\\{'  { return '\u007B'; }
-    / '\\}'  { return '\u007D'; }
-    / '\\u'  digits:$(hexDigit hexDigit hexDigit hexDigit) {
-        return String.fromCharCode(parseInt(digits, 16));
-    }
+  = quoted
+  / [^{}\0-\x1F\x7f \t\n\r]
 
 chars = chars:char+ { return chars.join(''); }

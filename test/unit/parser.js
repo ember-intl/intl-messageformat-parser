@@ -414,19 +414,15 @@ describe('parse()', function () {
     });
 
     describe('escaping', function () {
-        it('should allow escaping of syntax chars via `\\\\`', function () {
-            expect(parse('\\{').elements[0].value).to.equal('{');
-            expect(parse('\\}').elements[0].value).to.equal('}');
-            expect(parse('\\u003C').elements[0].value).to.equal('<');
-
-            // Escaping "#" needs to be special-cased so it remains escaped so
-            // the runtime doesn't replace it when in a `pluralFormat` option.
-            expect(parse('\\#').elements[0].value).to.equal('\\#');
+        it('should allow you to escape { and } characters', function () {
+            expect(parse("'{'test").elements[0].value).to.equal('{test');
+            expect(parse("test'}'").elements[0].value).to.equal('test}');
+            expect(parse("'{test}'").elements[0].value).to.equal('{test}');
         });
 
-        it('should allow backslash chars in `messageTextElement`s', function () {
-            expect(parse('\\u005c').elements[0].value).to.equal('\\');
-            expect(parse('\\\\').elements[0].value).to.equal('\\');
+        it('should allow for a backslash', function() {
+            expect(parse(`\\`).elements[0].value).to.equal(`\\`);
+            expect(parse(`foo \\\\ bar`).elements[0].value).to.equal(`foo \\\\ bar`);
         });
     });
 });
