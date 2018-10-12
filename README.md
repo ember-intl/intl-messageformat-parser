@@ -13,7 +13,7 @@ Overview
 
 This package implements a parser in JavaScript that parses the industry standard [ICU Message strings][ICU] — used for internationalization — into an AST. The produced AST can then be used by a compiler, like [`intl-messageformat`][intl-mf], to produce localized formatted strings for display to users.
 
-This parser is written in [PEG.js][], a parser generator for JavaScript. This parser's implementation was inspired by and derived from Alex Sexton's [messageformat.js][] project. The differences from Alex's implementation are:
+This parser is written in [PEG.js](https://pegjs.org/), a parser generator for JavaScript. This parser's implementation was inspired by and derived from Alex Sexton's [messageformat.js][] project. The differences from Alex's implementation are:
 
 - This project is standalone.
 - It's authored as ES6 modules compiled to CommonJS and the Bundle format for the browser.
