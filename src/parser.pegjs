@@ -74,7 +74,7 @@ elementFormat
     / selectFormat
 
 simpleFormat
-    = type:('number' / 'date' / 'time') _ style:(',' _ chars)? {
+    = type:('number' / 'date' / 'time' / 'shortNumber') _ style:(',' _ chars)? {
         return {
             type : type + 'Format',
             style: style && style[2],
